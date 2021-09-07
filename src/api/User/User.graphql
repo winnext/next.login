@@ -1,0 +1,16 @@
+type User{
+    id: Int,
+    name: String!
+}
+
+type RootQuery{
+    getUsers: [User]
+}
+
+type RootMutation {
+    createUser(name: String): User
+}
+    schema {
+        query:RootQuery
+        mutation:RootMutation
+    }
