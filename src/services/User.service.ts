@@ -14,4 +14,3 @@ export default (app:Application) => {
     rootValue: UserController,
   }));
 };
-,
