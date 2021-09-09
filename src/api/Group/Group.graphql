@@ -1,0 +1,16 @@
+type Group{
+    id: String,
+    name: String
+}
+type RootQuery{
+    getGroups: String
+}
+
+
+type RootMutation {
+    createGroup(name: String): String
+}
+schema {
+    mutation:RootMutation
+    query:RootQuery
+}

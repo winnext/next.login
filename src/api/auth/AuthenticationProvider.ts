@@ -74,4 +74,12 @@ export default class AuthenticationProvider {
        enabled: true,
      });
    }
+
+   // Create Group
+   public async createGroup(name:string):Promise<String> {
+     const p = await this.connection.groups.create({
+       name,
+     });
+     return p.id;
+   }
 }
