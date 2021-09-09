@@ -1,6 +1,7 @@
 import * as dotenv from 'dotenv';
 
 import KeycloakAdminClient from '@keycloak/keycloak-admin-client';
+import UserRepresentation from '@keycloak/keycloak-admin-client/lib/defs/userRepresentation';
 
 dotenv.config();
 export default class AuthenticationProvider {
@@ -14,7 +15,7 @@ export default class AuthenticationProvider {
      });
    }
 
-   public async auth() {
+   public async auth():Promise<void> {
      await this.connection.auth({
        username: 'admin@signumtte.com',
        password: 'Sgnm237..',
@@ -24,24 +25,26 @@ export default class AuthenticationProvider {
    }
 
    // List users
-   public async listUsers() {
-     return this.connection.users.find();
+   public async listUsers():Promise<UserRepresentation[]> {
+     const users = this.connection.users.find();
+     return users;
+     // return this.connection.users.find();
    }
 
    // Get single user by id
-   public async getSingleUser(userId:string) {
+   public async getSingleUser(userId:string):Promise<UserRepresentation> {
      return this.connection.users.findOne({
        id: userId,
      });
    }
 
    // Count users
-   public async countUsers() {
+   public async countUsers():Promise<number> {
      return this.connection.users.count();
    }
 
    // Update user
-   public async updateUser(userId:string, firstName:string, lastName:string, username:string) {
+   public async updateUser(userId:string, firstName:string, lastName:string, username:string): Promise<void> {
      this.connection.users.update(
        { id: userId },
        {
@@ -54,14 +57,14 @@ export default class AuthenticationProvider {
    }
 
    // Delete user
-   public async deleteUser(userId:string) {
+   public async deleteUser(userId:string):Promise<void> {
      this.connection.users.del({
        id: userId,
      });
    }
 
    // Create User
-   public async createUser(firstName:string, username:string, lastName:string) {
+   public async createUser(firstName:string, username:string, lastName:string): Promise<{id:string}> {
      return this.connection.users.create({
        username,
        firstName,
