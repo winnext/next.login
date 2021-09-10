@@ -7,6 +7,7 @@ import UserRepresentation from '@keycloak/keycloak-admin-client/lib/defs/userRep
 import { User } from '../User/User.types';
 
 import { Group } from '../Group/Group.types';
+import { Role } from '../Role/Role.types';
 
 dotenv.config();
 export default class AuthenticationProvider {
@@ -159,6 +160,61 @@ export default class AuthenticationProvider {
     try {
       const keycloakResponse = await this.connection.groups.findOne(
         { id },
+      );
+
+      return {
+        id: String(keycloakResponse.id),
+        name: String(keycloakResponse.name),
+      };
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  // Create Role
+  public async createRole(name:string):Promise<String> {
+    try {
+      const keycloakResponse = await this.connection.roles.create({
+        name,
+      });
+      return keycloakResponse.roleName;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  // Delete Role
+  public async deleteRole(name:string) :Promise<String> {
+    try {
+      await this.connection.roles.delByName(
+        { name },
+      );
+      return name;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  // Update Role
+  public async updateRole(name:string, updateName:string):Promise<String> {
+    try {
+      await this.connection.roles.updateByName(
+        { name },
+        { name: updateName },
+      );
+      return updateName;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  // Get Role
+  public async getRole(name:string):Promise<Role> {
+    // eslint-disable-next-line no-unreachable
+
+    try {
+      const keycloakResponse = await this.connection.roles.findOneByName(
+        { name },
       );
 
       return {
