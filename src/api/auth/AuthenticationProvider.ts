@@ -21,10 +21,10 @@ export default class AuthenticationProvider {
 
   public async auth(): Promise<void> {
     await this.connection.auth({
-      username: 'admin@signumtte.com',
-      password: 'Sgnm237..',
+      username: process.env.KEYCLOAK_USERNAME,
+      password: process.env.KEYCLOAK_PASSWORD,
       grantType: 'password',
-      clientId: 'admin',
+      clientId: String(process.env.KEYCLOAK_CLIENTID),
     });
   }
 
@@ -115,77 +115,58 @@ export default class AuthenticationProvider {
     }
   }
 
-   // Create User
-   public async createUser(firstName:string, username:string, lastName:string): Promise<{id:string}> {
-     return this.connection.users.create({
-       username,
-       firstName,
-       lastName,
-       email: username,
-       emailVerified: true,
-       enabled: true,
-     });
-   }
-
-   // Create Group
-   public async createGroup(name:string):Promise<String> {
-     try {
-       const keycloakResponse = await this.connection.groups.create({
-         name,
-       });
-       return keycloakResponse.id;
-     } catch (err) {
-       throw err;
-     }
-   }
-
-   // Delete Group
-   public async deleteGroup(id:string) :Promise<String> {
-     try {
-       await this.connection.groups.del(
-         { id },
-       );
-       return id;
-     } catch (err) {
-       throw err;
-     }
-   }
-
-   // Update Group
-   public async updateGroup(id:string, name:string):Promise<String> {
-     try {
-       await this.connection.groups.update(
-         { id },
-         { name },
-       );
-       return id;
-     } catch (err) {
-       throw err;
-     }
-   }
-
-   // Get group
-   public async getGroup(id:string):Promise<Group> {
-     // eslint-disable-next-line no-unreachable
-
-     try {
-       const keycloakResponse = await this.connection.groups.findOne(
-         { id },
-       );
-
-       return {
-         id: String(keycloakResponse.id),
-         name: String(keycloakResponse.name),
-       };
-     } catch (err) {
-       throw err;
-     }
-   }
   // Create Group
-  public async createGroup(name: string): Promise<String> {
-    const p = await this.connection.groups.create({
-      name,
-    });
-    return p.id;
+  public async createGroup(name:string):Promise<String> {
+    try {
+      const keycloakResponse = await this.connection.groups.create({
+        name,
+      });
+      return keycloakResponse.id;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  // Delete Group
+  public async deleteGroup(id:string) :Promise<String> {
+    try {
+      await this.connection.groups.del(
+        { id },
+      );
+      return id;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  // Update Group
+  public async updateGroup(id:string, name:string):Promise<String> {
+    try {
+      await this.connection.groups.update(
+        { id },
+        { name },
+      );
+      return id;
+    } catch (err) {
+      throw err;
+    }
+  }
+
+  // Get group
+  public async getGroup(id:string):Promise<Group> {
+    // eslint-disable-next-line no-unreachable
+
+    try {
+      const keycloakResponse = await this.connection.groups.findOne(
+        { id },
+      );
+
+      return {
+        id: String(keycloakResponse.id),
+        name: String(keycloakResponse.name),
+      };
+    } catch (err) {
+      throw err;
+    }
   }
 }
