@@ -1,4 +1,3 @@
-import GroupRepresentation from '@keycloak/keycloak-admin-client/lib/defs/groupRepresentation';
 import { Group } from './Group.types';
 import AuthenticationProvider from '../auth/AuthenticationProvider';
 

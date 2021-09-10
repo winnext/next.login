@@ -1,11 +1,11 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-useless-catch */
 import * as dotenv from 'dotenv';
 
 import KeycloakAdminClient from '@keycloak/keycloak-admin-client';
 import UserRepresentation from '@keycloak/keycloak-admin-client/lib/defs/userRepresentation';
-import GroupRepresentation from '@keycloak/keycloak-admin-client/lib/defs/groupRepresentation';
+
 import { Group } from '../Group/Group.types';
-import GroupController from '../Group/Group.controller';
 
 dotenv.config();
 export default class AuthenticationProvider {
