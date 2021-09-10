@@ -1,14 +1,16 @@
 type Group{
-    id: String,
-    name: String
+    id: String!,
+    name: String!
 }
 type RootQuery{
-    getGroups: String
+    getGroup(id:String): Group
 }
 
 
 type RootMutation {
     createGroup(name: String): String
+    deleteGroup(id:String):String
+    updateGroup(id:String,name:String):String
 }
 schema {
     mutation:RootMutation

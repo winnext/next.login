@@ -3,10 +3,12 @@ export type Group={
     name: String
 }
 export type RootQuery={
-    getGroups: String
+    getGroup(id:String): Group
 }
 
 export type RootMutation = {
     // eslint-disable-next-line no-unused-vars
     createGroup(name: String):String
+    deleteGroup(id:String):String
+    updateGroup(id:String, name:String):String
 }

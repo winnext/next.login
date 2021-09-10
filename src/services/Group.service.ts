@@ -1,7 +1,7 @@
 import { Application } from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import * as fs from 'fs';
-import { buildSchema } from 'graphql';
+import { buildSchema, NoSchemaIntrospectionCustomRule } from 'graphql';
 import { dirname, basename } from 'path';
 import GroupController from '../api/Group/Group.controller';
 
