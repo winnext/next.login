@@ -1,16 +1,25 @@
-type User{
-    id: Int,
-    name: String!
+type User {
+  id: String
+  username: String
+  firstName: String
+  lastName: String
 }
 
-type RootQuery{
-    getUsers: [User]
+type RootQuery {
+  getSingleUser(userId: String): User
 }
 
 type RootMutation {
-    createUser(name: String): User
+  createUser(firstName: String, username: String, lastName: String): String
+  updateUser(
+    id: String
+    firstName: String
+    lastName: String
+    username: String
+  ): String
+  deleteUser(userId: String): String
 }
-    schema {
-        query:RootQuery
-        mutation:RootMutation
-    }
+schema {
+  query: RootQuery
+  mutation: RootMutation
+}
