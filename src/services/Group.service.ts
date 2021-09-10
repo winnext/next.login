@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import { Application } from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import * as fs from 'fs';
