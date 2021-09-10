@@ -1,17 +1,21 @@
 export type User = {
-    id:number,
-    name: string
-}
+  id: String;
+  username: String;
+  firstName: String;
+  lastName: String;
+};
 export type RootQuery = {
-    getUsers: [User]
- }
+  getSingleUser(userId: String): User;
+};
 
 export type RootMutation = {
-    // eslint-disable-next-line no-unused-vars
-    createUser(name: String): User
-}
-
-export type Userx = {
-    id:number,
-    name: string
-}
+  // eslint-disable-next-line no-unused-vars
+  createUser(firstName: String, username: String, lastName: String): String;
+  updateUser(
+    id: String,
+    firstName: String,
+    lastName: String,
+    username: String
+  ): String;
+  deleteUser(userId: String): String;
+};
