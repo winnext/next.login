@@ -1,5 +1,5 @@
-import { User } from "./User.types";
-import AuthenticationProvider from "../auth/AuthenticationProvider";
+import { User } from './User.types';
+import AuthenticationProvider from '../auth/AuthenticationProvider';
 
 export default class UserController {
   static async createUser(data: JSON): Promise<String> {
@@ -19,7 +19,7 @@ export default class UserController {
       myObj.id,
       myObj.firstName,
       myObj.lastName,
-      myObj.username
+      myObj.username,
     );
   }
 

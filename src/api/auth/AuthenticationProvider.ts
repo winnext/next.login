@@ -1,9 +1,9 @@
 /* eslint-disable no-useless-catch */
-import * as dotenv from "dotenv";
+import * as dotenv from 'dotenv';
 
-import KeycloakAdminClient from "@keycloak/keycloak-admin-client";
-import UserRepresentation from "@keycloak/keycloak-admin-client/lib/defs/userRepresentation";
-import { User } from "../User/User.types";
+import KeycloakAdminClient from '@keycloak/keycloak-admin-client';
+import UserRepresentation from '@keycloak/keycloak-admin-client/lib/defs/userRepresentation';
+import { User } from '../User/User.types';
 
 dotenv.config();
 export default class AuthenticationProvider {
@@ -18,10 +18,10 @@ export default class AuthenticationProvider {
 
   public async auth(): Promise<void> {
     await this.connection.auth({
-      username: "admin@signumtte.com",
-      password: "Sgnm237..",
-      grantType: "password",
-      clientId: "admin",
+      username: 'admin@signumtte.com',
+      password: 'Sgnm237..',
+      grantType: 'password',
+      clientId: 'admin',
     });
   }
 
@@ -60,7 +60,7 @@ export default class AuthenticationProvider {
     userId: string,
     firstName: string,
     lastName: string,
-    username: string
+    username: string,
   ): Promise<String> {
     try {
       await this.connection.users.update(
@@ -70,7 +70,7 @@ export default class AuthenticationProvider {
           lastName,
           username,
           emailVerified: true,
-        }
+        },
       );
       return userId;
     } catch (error) {
@@ -94,7 +94,7 @@ export default class AuthenticationProvider {
   public async createUser(
     firstName: string,
     username: string,
-    lastName: string
+    lastName: string,
   ): Promise<String> {
     let keycloakUserResponse;
     try {
